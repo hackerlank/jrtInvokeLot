@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+  <!-- 链接数据库属性文件 -->
+  <properties resource="jdbc.properties" />
+  
+  <!-- Settings元素用于优化SqlMapClient实例的各选项, cacheModelsEnabled属性是否启用SqlMapClient的model的缓存处理，--> 
+  <settings useStatementNamespaces="true" cacheModelsEnabled="true"/>
+  <!-- 元素：在transactionManager元素中，定义数据源。
+  预定义三种数据源工厂：SIMPLE, DBCP, JNDI，不过也可以自己写一个。
+SIMPLE:在没有容器数据源支持的情况下使用的最简单的数据源实现
+DBCP:使用apache的DBCP数据源，ibatis框架对其直接提供支持
+   -->
+   <transactionManager type="JDBC">
+    <dataSource type="SIMPLE">
+        <property name="JDBC.Driver" value="${mysql.driver}" />
+		<property name="JDBC.ConnectionURL" value="${mysql.url}" />
+		<property name="JDBC.Username" value="${mysql.username}" />
+		<property name="JDBC.Password" value="${mysql.password}" />
+		<property name="Pool.MaximumActiveConnections" value="20" />
+		<property name="Pool.MaximumIdleConnections" value="5" />
+		<property name="Pool.MaximumWait" value="60000" />
+		<property name="Pool.LogAbandoned" value="false" />
+		<property name="Pool.RemoveAbandoned" value="false" />
+		<property name="Pool.RemoveAbandonedTimeout" value="50000" />
+    </dataSource>
+  </transactionManager>
+  <!-- 存放sql语句的xml -->
+  <sqlMap resource="com/jrt/invokeLot/model/sql/Category_SqlMap.xml"/>
+  <sqlMap resource="com/jrt/invokeLot/model/sql/News_SqlMap.xml"/>
+  <sqlMap resource="com/jrt/invokeLot/model/sql/Advert_SqlMap.xml"/>
+  <sqlMap resource="com/jrt/invokeLot/model/sql/CategoryType_SqlMap.xml" />
+</sqlMapConfig>
